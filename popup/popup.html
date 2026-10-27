@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>News Filter</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <img src="../icons/icon32.png" alt="" width="22" height="22" />
+        <span>News Filter</span>
+      </div>
+      <label class="switch" title="Ligar ou desligar o filtro">
+        <span id="enabled-label" class="switch-label">Ligado</span>
+        <input type="checkbox" id="enabled" role="switch" />
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="overview" id="tab-overview">Overview</button>
+      <button class="tab" role="tab" data-tab="config" id="tab-config">Config</button>
+    </nav>
+
+    <section class="panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="summary" id="summary"></div>
+      <div class="site-line" id="site-line">
+        <span id="site-host"></span>
+        <button class="link" id="site-toggle"></button>
+      </div>
+
+      <div class="list-head" id="overview-head">
+        <span id="active-count"></span>
+        <span class="bulk">
+          <button class="link" id="check-all">Marcar todas</button>
+          <span aria-hidden="true">·</span>
+          <button class="link" id="check-none">Desmarcar todas</button>
+        </span>
+      </div>
+      <ul class="list" id="overview-list"></ul>
+
+      <div class="empty" id="overview-empty">
+        <p>Nenhuma palavra-chave ainda.</p>
+        <button class="btn" id="go-config">Adicionar em Config</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-config" role="tabpanel" aria-labelledby="tab-config">
+      <form class="add" id="add-form">
+        <label for="keyword-input">Palavras-chave</label>
+        <div class="add-row">
+          <input id="keyword-input" type="text" placeholder="ex.: futebol, BBB, elei*" autocomplete="off" />
+          <button class="btn primary" type="submit">Adicionar</button>
+        </div>
+        <p class="hint">
+          Separe várias por vírgula. Maiúsculas e acentos não importam.
+          Use <code>*</code> para variações: <code>elei*</code> pega eleição, eleições, eleitoral.
+        </p>
+      </form>
+
+      <div class="list-head">
+        <span id="config-count"></span>
+        <button class="link danger" id="clear-all">Apagar todas</button>
+      </div>
+      <ul class="list" id="config-list"></ul>
+
+      <div class="section">
+        <span class="section-title">Sites</span>
+        <div class="segmented" role="radiogroup" aria-label="Onde o filtro roda">
+          <label><input type="radio" name="site-mode" value="except" /><span>Todos, exceto a lista</span></label>
+          <label><input type="radio" name="site-mode" value="only" /><span>Só os sites da lista</span></label>
+        </div>
+        <form class="add" id="site-form">
+          <div class="add-row">
+            <input id="site-input" type="text" placeholder="ex.: g1.globo.com, mail.google.com" autocomplete="off" aria-label="Adicionar site" />
+            <button class="btn primary" type="submit">Adicionar</button>
+          </div>
+        </form>
+        <p class="hint" id="site-hint"></p>
+        <button class="btn add-current" id="add-current" hidden></button>
+        <ul class="list" id="site-list"></ul>
+      </div>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
